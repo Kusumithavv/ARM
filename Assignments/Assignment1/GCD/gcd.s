@@ -3,14 +3,14 @@
      export __main	 
 	 ENTRY 
 __main  function
-	          MOV r0 , #12	  ;value of a	
-			  MOV r1 , #60     ;value of b
-LOOP			  CMP r0 , r1
+	          MOV r0 , #12	  ;1st no	
+			  MOV r1 , #60     ;2nd no
+LOOP			  CMP r0 , r1       ;compare if they are =/>/<
               IT EQ 
               BEQ STOP	
               ITE HI			  
-			  SUBHI r0 , r0 , r1 			  
-			  SUBLS r1 , r1 , r0
+			  SUBHI r0 , r0 , r1 	;if higher		  
+			  SUBLS r1 , r1 , r0    ;if lower
               B LOOP			  
 STOP		      B STOP  ; stop program
         endfunc
