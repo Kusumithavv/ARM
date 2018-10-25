@@ -1,1 +1,36 @@
+IF-THEN-ELSE in ARM Assembly ::
+
+The IT (If-Then) instruction has the following syntax:
+                                                      IT{x{y{z}}} {cond}
+where:
+x    : specifies the condition switch for the second instruction in the IT block.
+y    : specifies the condition switch for the third instruction in the IT block.
+z    : specifies the condition switch for the fourth instruction in the IT block.
+cond : specifies the condition for the first instruction in the IT block.
+
+The condition switch for the second, third and fourth instruction in the IT block can be either:
+T-Then. Applies the condition cond to the instruction.
+E-Else. Applies the inverse condition of cond to the instruction.
+
+Restrictions when using an IT block are:
+
+A branch or any instruction that modifies the PC is only permitted in an IT block if it is the last instruction in the block.
+You cannot branch to any instruction in an IT block, unless when returning from an exception handler.
+You cannot use any assembler directives in an IT block.
+(The assembler shows a diagnostic message when any of these instructions are used in an IT block.
+
+IT Instruction does not change the flags.
+
+For Example:
+    ITTE   NE        ; IT can be omitted
+    ANDNE  r0,r0,r1  ; 16-bit AND, not ANDS
+    ADDSNE r2,r2,#1  ; 32-bit ADDS (16-bit ADDS does not set flags in IT block)
+    MOVEQ  r2,r3     ; 16-bit MOV
+    ADD    r0,r0,r1  ; expands into 32-bit ADD, and is not in IT block    // syntax error: no condition code used in IT block
+
+So, ultimately the conditions that if/then should follow in an IT instrucction should be such that they shouldn't set any flags.
+Hence in the given CODE-1 , Keil simulator shows the error message "Specified condition is not consistent with previous IT". But, in the 
+CODE-2 ITTTE is followed by ADDLT,MOVLT,SUBGE instructions.Thus, eliminating the errors.
+
+     
 
