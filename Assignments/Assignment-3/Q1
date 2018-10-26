@@ -1,1 +1,25 @@
+IEEE floating point representation for binary real numbers consists of three components. 
+For a 32-bit (called single precision) number,they are:
+                              (sign) × mantissa × (2)^(± exponent)
+1. Sign, for which 1 bit is allocated.
+2. Mantissa (called significand in the standard) is allocated 23 bits.
+3. Exponent is allocated 8 bits. As both positive and negative numbers are required for the exponent, instead of using a separate sign bit
+for the exponent, the standard uses a biased representation. The value of the bias is 127. Thus an exponent0 means that –127 is stored in 
+the exponent field.
+The exponents –127 (all 0s) and + 128 (all 1s) are reserved for representing special numbers.
 
+To increase the precision of the significand, the IEEE 754 Standard uses a normalized significand(fractional part) which implies that its
+most significant bit is always 1. As this is implied, it is assumed to be on the left of the (virtual) decimal point of the significand.
+Thus in the IEEE Standard, the significand is 24 bits long – 23 bits of the significand which is stored in the memory and an implied 1 as
+the most significant 24th bit. The extra bit increases the number of significant digits in the significand. Thus, a floating point
+number in the IEEE Standard is :
+                                          (-1)^s * (1.f)*2^(exponent-127)
+where s is the sign bit; s = 0 is used for positive numbers and s= 1 for representing negative numbers. f represents the bits in the
+significand.
+In any of the formats for representing floating point numbers, machine epsilon is defined as the difference between 1 and the next larger
+number that can be stored in that format. 
+For example, in 32-bit IEEE format with a 23-bit significand, the machine epsilon is (2)^–23 = 1.19 × 10^(–7). 
+This essentially tells us that the precision of decimal numbers stored in this format is 7 digits.
+The term precision and accuracy are not the same. Accuracy implies correctness whereas precision does not. 
+For 64-bit representation of IEEE floating point numbers the significand length is 52 bits. 
+Thus, machine epsilon is 2^–52 = 2.22 ×10^–16. Therefore, decimal calculations with 64 bits give 16 digit precision.
