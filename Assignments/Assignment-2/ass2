@@ -1,10 +1,10 @@
 IF-THEN-ELSE in ARM Assembly ::
 Cortex-M4 processors support conditional branches, as well as conditional execution of instructions by putting the conditional 
-instructions in an IF-THEN (IT) instruction block. By updating the APSR using data operations, or instructionslike test (TST) or compare
-(CMP), the program flow can be controlled  based on conditions of operation results.
-The required condition for a conditional branch to take place is indicated by a suffix.
+instructions in an IF-THEN (IT) instruction block.
+By updating the APSR using data operations, or TST (test) or compare (CMP), the program flow can be controlled  based on conditions of 
+operation.
 
-Suffixes for Conditional Branches and Conditional Execution are EQ,NE,LT,GE,GT,LE,MI,PL,VC,VS,HI,LS,CC,CS
+Suffixes for Conditional Execution are EQ,NE,LT,GE,GT,LE,MI,PL,VC,VS,HI,LS,CC,CS.
 
 The IT (If-Then) instruction has the following syntax:
                                                       IT{x{y{z}}} {cond}
@@ -18,19 +18,17 @@ condition specified by the IT instruction and the APSR value.
 The conditional execution instructions can be data processing instructions or memory access instructions.
 
 The condition switch for the second, third and fourth instruction in the IT block can be either:
-T-Then. Applies the condition cond to the instruction.
+T-Then. Applies the condition 'cond' to the instruction.
 E-Else. Applies the inverse condition of cond to the instruction.
 
 Restrictions when using an IT block are:
-
-A branch or any instruction that modifies the PC is only permitted in an IT block if it is the last instruction in the block.
-You cannot branch to any instruction in an IT block, unless when returning from an exception handler.
 You cannot use any assembler directives in an IT block.
-(The assembler shows a diagnostic message when any of these instructions are used in an IT block.
+(The assembler shows a diagnostic message when any of these instructions are used in an IT block).
 
 IT Instruction does not change the flags.
 
 For Example:
+------------
  PSEUDO CODE  --------------->   ASSEMBLY CODE
 if (r0 > r1) {   ------>        cmp r0,r1 ;set flags
                                 ITTEE GT ;condition 4 instr
@@ -40,7 +38,9 @@ sub r3,r4,r5    ------->        subgt r3,r4,r5 ;do if r0>r1
 and r2,r3,r4    ------->        andle r2,r3,r4 ;do if r0<=r1
 orr r3,r4,r5    ------->        orrle r3,r4,f5 ;do if r0<=r1
 }
+
 Example 2:
+------------
     ADDSNE r2,r2,#1  ; 32-bit ADDS (16-bit ADDS does not set flags in IT block)
     MOVEQ  r2,r3     ; 16-bit MOV
     ADD    r0,r0,r1  ; expands into 32-bit ADD, and is not in IT block    // syntax error: no condition code used in IT block
@@ -48,8 +48,8 @@ Example 2:
 but ADDEQ/ADDLT/ADDGE etc..
 
 So, ultimately the conditions that if/then should follow in an IT instrucction should be such that they shouldn't set any flags.
-Hence in the given CODE-1 , Keil simulator shows the error message "Specified condition is not consistent with previous IT". But, in the 
-CODE-2 ITTTE is followed by ADDLT,MOVLT,SUBGE instructions.Thus, eliminating the errors.
+Hence in the given CODE-1 , Keil simulator shows the error message "Specified condition is not consistent with previous IT". But in the 
+CODE-2, ITTTE is followed by ADDLT,MOVLT,SUBGE instructions.Thus, eliminating the errors.
 
      
 
