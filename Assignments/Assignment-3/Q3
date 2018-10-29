@@ -1,14 +1,12 @@
                             IEEE 754 standards for Rounding Floating point numbers
               ------------------------------------------------------------------------------------
 ROUNDING-DIRECTION ATTRIBUTES :
-Rounding takes a number regarded as infinitely precise and, if necessary, modifies it to fit in the destination’s format while signaling
-the inexact exception, underflow, or overflow when appropriate.
+Rounding takes a number regarded as infinitely precise and, if necessary, modifies it to fit in the destination’s format.
 There are separate rounding-direction attributes for binary and decimal, the binary rounding direction and the decimal rounding direction. 
 
 Rounding-direction attributes to nearest :
 ------------------------------------------
-There are two rounding-direction attributes, an infinitely precise result with magnitude at least (b^emax)*(b − ½*(b^(1−p)) shall round
-to ∞ with no change in sign; 
+There are two rounding-direction attributes, an infinitely precise result with magnitude round to ∞ with no change in sign.
 --> roundTiesToEven: 
 the floating-point number nearest to the infinitely precise result shall be delivered; 
 if the two nearest floating-point numbers bracketing an unrepresentable infinitely precise result are equally near, the one with an even 
@@ -21,8 +19,8 @@ magnitude shall be delivered.
 
 Directed rounding attributes :
 ------------------------------
-Three other user-selectable rounding-direction attributes are defined, the directed rounding attributes roundTowardPositive, 
-roundTowardNegative, and roundTowardZero.
+User-selectable rounding-direction attributes are defined:
+
 --> roundTowardPositive : the result shall be the format’s floating-point number (possibly +∞) closest to and no less than the infinitely
 precise result
 --> roundTowardNegative : the result shall be the format’s floating-point number (possibly −∞) closest to and no greater than the 
