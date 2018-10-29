@@ -1,8 +1,12 @@
 Normal and Subnormal  Values as per IEEE 754  standards:
+----------------------------------------------------------
 NORMAL NUMBER:
+--------------
 For a particular format, a finite non-zero floating-point number with magnitude >= minimum b^emin value, where b is the radix. 
 In this standard, zero is neither normal nor subnormal. 
+
 SUBNORMAL NUMBER:
+-----------------
 In a particular format, a non-zero floating-point number with magnitude < magnitude of that format’s smallest normal number. 
 A subnormal number does not use the full precision whereas, normal numbers use.
 Floating-point data representaion:            (−1)^sign ×(b)^exponent × (significand)
@@ -16,7 +20,7 @@ where,  s is 0 or 1
         m is a number represented by a digit string of the form d0 • d1 d2…dp −1 ; di is an integer digit 0 ≤ di < b (therefore 0 ≤ m < b).
 
 The smallest positive normal floating-point number is b emin and the largest is (b^emax)*(b − b^(1− p)). 
-The non-zero floating-point numbers for a format with magnitude < b^emin are called subnormal because their magnitudes lie between zero
+The non-zero floating-point numbers for a format with magnitude < (b^emin) are called subnormal because their magnitudes lie between zero
 and the smallest normal magnitude. They always have fewer than p significant digits.
 Every finite floating-point number is an integral multiple of the smallest subnormal magnitude b^emin × b^(1−p). 
                                                 
