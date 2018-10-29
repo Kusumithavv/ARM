@@ -8,7 +8,8 @@ In this standard, zero is neither normal nor subnormal.
 SUBNORMAL NUMBER:
 -----------------
 In a particular format, a non-zero floating-point number with magnitude < magnitude of that format’s smallest normal number. 
-A subnormal number does not use the full precision whereas, normal numbers use.
+i.e When all the exponent bits are 0 and the leading hidden bit of the siginificand is 0, then the floating point
+number is called a subnormal number.
 Floating-point data representaion:            (−1)^sign ×(b)^exponent × (significand)
                                    where b :  b = the radix, 2 or 10 
                                          p = the number of digits in the significand (precision) 
@@ -19,7 +20,7 @@ where,  s is 0 or 1
         e is any integer emin ≤ e ≤ emax
         m is a number represented by a digit string of the form d0 • d1 d2…dp −1 ; di is an integer digit 0 ≤ di < b (therefore 0 ≤ m < b).
 
-The smallest positive normal floating-point number is b emin and the largest is (b^emax)*(b − b^(1− p)). 
+The smallest positive normal floating-point number is (b^emin)- 2^-149 and the largest is (b^emax)*(b − b^(1− p)). 
 The non-zero floating-point numbers for a format with magnitude < (b^emin) are called subnormal because their magnitudes lie between zero
 and the smallest normal magnitude. They always have fewer than p significant digits.
 Every finite floating-point number is an integral multiple of the smallest subnormal magnitude b^emin × b^(1−p). 
