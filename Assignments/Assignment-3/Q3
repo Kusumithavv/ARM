@@ -11,11 +11,15 @@ There are two rounding-direction attributes, an infinitely precise result with m
 the floating-point number nearest to the infinitely precise result shall be delivered; 
 if the two nearest floating-point numbers bracketing an unrepresentable infinitely precise result are equally near, the one with an even 
 least significant digit shall be delivered.
+                    Ex: 3.7 is rounded off to 4.0
 
 --> roundTiesToAway: 
 the floating-point number nearest to the infinitely precise result shall be delivered;
 if the two nearest floating-point numbers bracketing an unrepresentable infinitely precise result are equally near, the one with larger 
 magnitude shall be delivered.
+                    Ex: 3.7 is rounded off to 3.0
+				                5.7  is rounded off to 6.0
+
 
 Directed rounding attributes :
 ------------------------------
@@ -23,9 +27,14 @@ User-selectable rounding-direction attributes are defined:
 
 --> roundTowardPositive : the result shall be the format’s floating-point number (possibly +∞) closest to and no less than the infinitely
 precise result
+                      Ex: 3.5 is rounded off to 4.0  ,  3.9 is rounded off to 4.0
 --> roundTowardNegative : the result shall be the format’s floating-point number (possibly −∞) closest to and no greater than the 
 infinitely precise result 
+                       Ex: 3.5 is rounded off to 3.0 ,   3.9 is rounded off to 4.0
+
 --> roundTowardZero     : the result shall be the format’s floating-point number closest to and no greater in magnitude than the infinitely
 precise result.
+               Ex: 7.5 is rounded off to 7.0   ,	7.9 is rounded off to 7.0
+
 
 
