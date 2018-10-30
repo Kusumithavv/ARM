@@ -23,5 +23,10 @@ where,  s is 0 or 1
 The smallest positive normal floating-point number is (b^emin)- 2^-149 and the largest is (b^emax)*(b − b^(1− p)). 
 The non-zero floating-point numbers for a format with magnitude < (b^emin) are called subnormal because their magnitudes lie between zero
 and the smallest normal magnitude. They always have fewer than p significant digits.
-Every finite floating-point number is an integral multiple of the smallest subnormal magnitude b^emin × b^(1−p). 
+Every finite floating-point number is an integral multiple of the smallest subnormal magnitude b^emin × b^(1−p).
+
+For Example :
+Normal Representation: 1.011*2^-6
+Subnormal Representation: 0.000101*2^-5
+ 
                                                 
