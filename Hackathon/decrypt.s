@@ -1,25 +1,25 @@
-	PRESERVE8
+PRESERVE8
      THUMB
      AREA     appcode, CODE, READONLY
      EXPORT __main
 	 ENTRY 
 __main  FUNCTION
-
-	
-	LDR r6, =0x20012C02    ;location of IV
-	LDR r8 , =0x20012C01   ;location of cipher text
-	LDR r10,[r6]    ;loading initialization vector to r10
-	MOV r9,#1    ;loading encrypted text msg to decrypt
-	STR r9,[r8]   
-	LDR r11, [r8] ;loading result from ciphertext location (of encryped text) to r11
-	CMP r10, #10 ; IV location value = 0 indicates start of msg
-	BEQ STARTMSGD
-	EOR r9,r7,r11  ; exor current cipher text with prev cipher text msg
-STARTMSGD 
-	MOV r7 , r11   ; move encryped cipher text to r7
-	EOR r9,r11,#10 ; r9 = exor of ciphertext & initialization vector(cdtn for 1st msg)
-      
+	LDR r8 , =0x20005C01   ;location of cipher texT
+	LDR r9,[r8]  ;ciphertext msg from encryption
+	MOV r10,r9	;storing previos ciphertext
+	EOR r9,r9,#10 ; r9 = exor of ciphertext & initialization vector(cdtn for 1st msg)
+	STR r9,[r8]		;store decrypted msg
+	ADD r8,r8,#4	;increament to store decrypted msg
+	MOV r11,#1 ; counter for decrypting all words
+LOOP	
+		LDR r9, [r8] ;loading result from ciphertext location (of encryped text) to r11
+		EOR r9,r9,r10
+		MOV r10,r9	;storing previos ciphertext
+		ADD r8,r8,#4		;increament to store decrypted msg
+		ADD r11,r11,#1	; counter for decrypting all words
+		CMP r11,#25
+		BNE LOOP
+		
 stop B stop ; stop program
 	 ENDFUNC
 	 END
-
