@@ -48,7 +48,7 @@ DRAWX2
 		SUBGE r6 , r6 , #0x0000000A	;Every x location of cross will be 240 apart
 		BGE DRAWX2
     
- ENCRYPT MOV r4, r0
+ENCRYPT MOV r4, r0
 	LDR r6,=0x20000C02 ;location of IV
 	LDR r8,=0x20005C01 ;location of cipher text
 	MOV r9, #10	;value for IV
