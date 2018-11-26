@@ -4,7 +4,9 @@
      EXPORT __main
 	 ENTRY 
 __main  FUNCTION
- MOV r4, r0
+	LDR r0 , =0x2000000A   ;starting address
+	LDR r1 , =0x2000006D   ;end address
+ 	MOV r4, r0
 	LDR r6,=0x20000C02 ;location of IV
 	LDR r8,=0x20005C01 ;location of cipher text
 	MOV r9, #10	;value for IV
