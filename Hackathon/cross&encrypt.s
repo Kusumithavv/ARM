@@ -48,23 +48,26 @@ DRAWX2
 		SUBGE r6 , r6 , #0x0000000A	;Every x location of cross will be 240 apart
 		BGE DRAWX2
     
- ENCRYPT
-  MOV r7, #11  ; plain text
+ ENCRYPT MOV r4, r0
 	LDR r6,=0x20000C02 ;location of IV
 	LDR r8,=0x20005C01 ;location of cipher text
-	MOV r9, #10
-	STR r9, [r6]
+	MOV r9, #10	;value for IV
+	STR r9, [r6]  ;store 10 to IV
 	LDR r10,[r6]    ;initialization vector
+	
+	LDR r7, [r4]  ; reading plain text from start add
 	CMP r10, #10 ;initialization vector value = 10
-	BEQ STARTMSG
-	LDR r10 , =0   ; making IV=0 for 2nd msg onwards
+	EOR r7,r7,r10 ; exor of plaintext & initialization vector
+	STR r10 , [r6]       ;store IV 
+	STR r7,[r8] ;storing the result
+	ADD r4, r4,#4
+ELOOP
+	LDR r7, [r4]  ; reading plain text from start add
 	LDR r11, [r8]  ; load encrypted result to r11
 	EOR r7,r7,r11  ;exor result with plain text
-
-
-STARTMSG	EOR r7,r7,r10 ; exor of plaintext & initialization vector
-	STR r10 , [r6]       ;store IV 
-	STRB r7,[r8] ;storing the result
+	ADD r4, r4,#4
+	CMP r4,r1
+	BNE ELOOP
       
 stop B stop ; stop program
 	 ENDFUNC
