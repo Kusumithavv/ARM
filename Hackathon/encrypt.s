@@ -14,13 +14,13 @@ __main  FUNCTION
 	LDR r10,[r6]    ;initialization vector
 	CMP r10, #10 ;initialization vector value = 10
 	BEQ STARTMSG
-	LDR r11, [r8]
-	EOR r7,r7,r11
+	LDR r10 , =0   ; making IV=0 for 2nd msg onwards
+	LDR r11, [r8]  ; load encrypted result to r11
+	EOR r7,r7,r11  ;exor result with plain text
 
 
 STARTMSG	EOR r7,r7,r10 ; exor of plaintext & initialization vector
-	LDR r10 , =0 
-	STR r10 , [r6] 
+	STR r10 , [r6]       ;store IV 
 	STRB r7,[r8] ;storing the result
       
 stop B stop ; stop program
